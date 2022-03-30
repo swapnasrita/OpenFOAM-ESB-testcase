@@ -1,0 +1,46 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+       actions
+(
+    {
+        name    porousCellSet;//give a name to the set you are using 
+				//will be used later
+        type    cellSet;//define kind of zone- cell
+        action  new;
+        source  boxToCell;//converting box to cell. 
+        sourceInfo
+        {
+            box (0.002 0.002 0.002)(0.004 0.004 0.004);
+		//one end to the diagonal opposite end
+        }
+    }
+    {
+        name    porousCells;//name of the zone (to be used again)
+        type     cellZoneSet;
+        action  new;
+        source  setToCellZone;//converting a set to a zone
+        sourceInfo
+        {
+            set porousCellSet;//here we use the cell set name
+        }
+    } 
+);
+
+// ************************************************************************* //
+
